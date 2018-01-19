@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Project #1: Make Something</string>
+    <string name="calcEt">Postfix Calculator</string>
+    <string name="ButtonText">Calculate</string>
+</resources>
