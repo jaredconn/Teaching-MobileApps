@@ -1,1 +1,2 @@
-This is where course projects go.  I am editing this to see how forks can incoroprate changes.  More changes.
+PROJECT 1: MAKE SOMETHING
+A simple post Fix notation calculator.
