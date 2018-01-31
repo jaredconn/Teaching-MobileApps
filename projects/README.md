@@ -1,2 +1,1 @@
-PROJECT 1: MAKE SOMETHING
-A simple post Fix notation calculator.
+#Fall 2018 Projects
