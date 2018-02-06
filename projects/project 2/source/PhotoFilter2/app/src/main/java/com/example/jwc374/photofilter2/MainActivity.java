@@ -3,6 +3,8 @@ package com.example.jwc374.photofilter2;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,12 +43,31 @@ public class MainActivity extends AppCompatActivity {
     {
         if(requestCode == REQUEST_CODE)
         {
-            if(resultCode == RESULT_OK)
+            if(resultCode == RESULT_OK) //operation was successful
             {
                 Bundle bundle = new Bundle();
                 bundle = data.getExtras();
                 Bitmap BMP;
                 BMP = (Bitmap) bundle.get("data");
+
+                /*float aspectRatio = BMP.getWidth() /
+                        (float) BMP.getHeight();
+                int width = 480;
+                int height = Math.round(width / aspectRatio);
+
+                BMP = Bitmap.createScaledBitmap(
+                        BMP, width, height, true);
+                */
+                BMP.setDensity(500);
+                int maxHeight = 2000;
+                int maxWidth = 2000;
+                float scale = Math.min(((float)maxHeight / BMP.getWidth()), ((float)maxWidth / BMP.getHeight()));
+
+                Matrix matrix = new Matrix();
+                matrix.postScale(scale, scale);
+
+                BMP = Bitmap.createBitmap(BMP, 0, 0, BMP.getWidth(), BMP.getHeight(), matrix, true);
+
                 IMG.setImageBitmap(BMP);
             }
         }
