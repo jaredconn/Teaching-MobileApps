@@ -1,11 +1,13 @@
 package com.example.jwc374.photofilter2;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,14 +17,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final int CAMERA_REQUEST = 1888;
 
     Button button;
     Button button2;
 
-
+    int i = 0;
     int REQUEST_CODE = 1;
     ImageView IMG;
 
@@ -34,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         button = (Button) findViewById(R.id.button);
         button2 = (Button) findViewById(R.id.button2);
         IMG = (ImageView) findViewById(R.id.img);
+
 
 //choose existing from gallery
         button2.setOnClickListener(new Button.OnClickListener() {
@@ -50,13 +58,25 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View arg0) {
+
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                //saving the image to a file
+                File imageDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                String fileName = getFileName();
+                File imageFile = new File(imageDirectory, fileName);
+                Uri imageUri = Uri.fromFile(imageFile);
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+
                 if (cameraIntent.resolveActivity(getPackageManager()) != null) //check if camera application is available on device
                 {
                     startActivityForResult(cameraIntent, REQUEST_CODE);
                 }
             }
         });
+    }
+
+    private String getFileName() {
+        return "image" + i + ".jpg";
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -69,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                     Bitmap bitmap;
                     try {
                         bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
-                        IMG.setImageBitmap(bitmap);
+                        IMG.setImageBitmap(ImageFix.fixOrientation(bitmap));
                     } catch (FileNotFoundException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -77,45 +97,14 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (requestCode == 1) //then we're taking a new photo
                 {
-                    Bitmap BMP = (Bitmap) data.getExtras().get("data");
-                    IMG.setImageBitmap(BMP);
-                    /*
-                    Bundle bundle = new Bundle();
-                    bundle = data.getExtras();
-                    Bitmap BMP;
-                    BMP = (Bitmap) bundle.get("data");
-                    IMG.setImageBitmap(BMP);
-                    */
+                    File imageFile = new File("storage/emulated/0/Pictures/image" + i + ".jpg");
+                    if(imageFile.exists()){
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath()); //retrieving file
+                        IMG.setImageBitmap(ImageFix.fixOrientation(myBitmap));
+                        i++;
+                    }
                 }
             }
         }
     }
 }
-/*
-                /*float aspectRatio = BMP.getWidth() /
-                        (float) BMP.getHeight();
-                int width = 480;
-                int height = Math.round(width / aspectRatio);
-
-                BMP = Bitmap.createScaledBitmap(
-                        BMP, width, height, true);
-                /////
-                BMP.setDensity(500);
-                int maxHeight = 2000;
-                int maxWidth = 2000;
-                float scale = Math.min(((float)maxHeight / BMP.getWidth()), ((float)maxWidth / BMP.getHeight()));
-
-                Matrix matrix = new Matrix();
-                matrix.postScale(scale, scale);
-
-                BMP = Bitmap.createBitmap(BMP, 0, 0, BMP.getWidth(), BMP.getHeight(), matrix, true);
-
-                     IMG.setImageBitmap(BMP);
-                }
-            }
-        }
-    }
-}
-*/
-
-
