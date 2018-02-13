@@ -1,5 +1,5 @@
-# APPLICATION NAME
-Photo Filter by Jared Conn
+# Photo Filter
+
 This application lets the user of their mobile device select an image from either their gallery or to take a new photo. Colorful image filters can be applied to the image to give the image a new feel. This application accesses android hardware (the camera). Also the application stores files to internal storage, retreives files from storage and makes use of two interacting views.
 
 ## System Design 
@@ -27,7 +27,9 @@ Clone this repository and start an exisiting project using my code. Build the co
 When the app starts, there are two buttons: Choose from Gallery, and, Take Photo. Once you have a photo you'd like to use, select it and then you will be able to select the different color options by clicking the buttons on the bottom of the screen. The rotate button rotates the image 90 degrees at a time. Once you are satisfied with your photo, you can save it to your gallery and keep it forever, or start again! 
 
 Screenshots:
-
+![alt text](https://github.com/jaredconn/Teaching-MobileApps/blob/master/projects/project%202/Screenshot_2018-02-12-19-24-42.png)
+![alt text](https://github.com/jaredconn/Teaching-MobileApps/blob/master/projects/project%202/Screenshot_2018-02-12-19-25-11.png)
+![alt text](https://github.com/jaredconn/Teaching-MobileApps/blob/master/projects/project%202/Screenshot_2018-02-12-19-25-59.png)
 
 
 I am still working out the rotations in the color filter code. Some changes need to be made there because after saving an image to the gallery, the images are sometimes oriented sideways or backwards etc. I think I know what I need to do for that.
