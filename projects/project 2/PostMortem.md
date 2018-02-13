@@ -1,11 +1,6 @@
 # Post Mortem
-Use this page to discuss what you learned from completing this assignment.  It should be completed **after** you finish coding your assignment. Your post mortem must be at least 500 words long.  Note that the focus of the paper should be on your reflection, not on structure (e.g. introductory paragraph, conclusion, etc.).  The essay is graded on content (i.e. it shows deep though) rather than syntax (e.g. spelling) and structure.  
+From this assignment I learned how to access android hardware. I also learned how to access a file location and to save a file to a specific location. I learned about imageView and displaying images to one. I learned how to make a multiview app. I learned about intents- you can use them to define a path to the next activity and also you can post data to an intent and pass that along using intent.putExtra("name", string), that data is then accessable in the next activity! So that was fun- I used an intent to find the path of my image file I chose to edit. I used color filters instead of modifying pixels in the bitmap since I was crunched for time on the deadline - however I want to implement more advanced photo editing in my application. When pulling an image file into an imageView in android, sometimes the orientation is messed in the imageView- but the file is actually oriented correctly in the gallery. For this issue I used the matrix class to store the bitmap and then recreated the Bitmap and then used the matrix.postrotate() method to fix the imageView. When saving back to the gallery, I need to reverse the rotates so that the image is saved back to proper orientation. This would be easy to implement, since I know how much I rotate the image to fix it in the imageView. 
 
-Below are some prompts that can be used to get you thinking.  Feel free to use these or to make up your own.
-* Describe a particular struggle that you overcame when working on this programming assignment.
-* Conversely, describe an issue with your assignment that you were unable to resolve.
-* Provide advice to a future student on how he or she might succeed on this assignment.
-* Describe the most fun aspect of the assignment.
-* Describe the most challenging aspect of the assignment.
-* Describe the most difficult aspect of the assignment to understand.
-* Provide any suggestions for improving the assignment in the future.
+One of the things that bothers me about my application is that I retreive the original image each time I apply a color effect to it. Since you can't reference a (outside) view in a button click I had to findViewById and reload the path, and set the imageview each time I clicked one of my effect buttons. I wasn't sure how to get around this issue other than to brute force it.
+
+I think the most difficult part of the assignment was knowing the pseudo code- just knowing find the file location, save the file, and retreive the file, then put it in the imageView. I may suggest that as a gimme for future students but I'm not sure if that defeats the purpose of the exercise. Once you helped me with that, everything else was easy to google and put it together.
