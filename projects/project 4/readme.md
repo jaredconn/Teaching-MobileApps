@@ -4,4 +4,4 @@ This app has been optimized to target android 7 devices
 this app is now more efficient 
 redundencies were removed and app was streamlined
 app works much better.
-I removed the rotate feature- now the app's rotate just works as intended.
+I removed the rotate feature- now the photo is already in its proper orientation when placed in the imageview
